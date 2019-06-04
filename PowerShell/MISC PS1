@@ -1,0 +1,23 @@
+# DELETE PATH
+Remove-Item -PATH tmpflyway -Recurse -ErrorAction Ignore
+
+# RESPONSE WRITE
+Write-Host "* List all containers" -f magenta
+
+# SLEEP
+Start-Sleep 5
+
+# EXECUTING DIRECTOR
+$executingScriptDirectory = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
+
+# REPLACE 
+$flywaySourceDirectory = $executingScriptDirectory -replace 'Docker-Compose','flyway'
+
+# COPY
+Copy-Item $flywaySourceDirectory -Destination $executingScriptDirectory"\tmpflyway" -Recurse
+
+# CLEAR
+Clear-Host
+
+# GIT CLONE
+git clone https://github.com/carlpaton/lexicon 'C:\Dev\lexicon\Docs\Docker-Compose\tmpwebmvc'
